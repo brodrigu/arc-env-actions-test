@@ -16,10 +16,49 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       ARC_ENV: testing
     steps:
-      - name: Build App
-        uses: architect/action-build@v3
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.12.1
+
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      - name: Env
+        shell: bash
+        run: |
+          echo "Event name: ${{ github.event_name }}"
+          echo "Git ref:    ${{ github.ref }}"
+          echo "GH actor:   ${{ github.actor }}"
+          echo "SHA:        ${{ github.sha }}"
+          VER=`node --version`; echo "Node ver:   $VER"
+          VER=`npm --version`; echo "npm ver:    $VER"
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Install Architect
+        shell: bash
+        run: npm install @architect/architect
+
+      - name: Vendor dist files
+        shell: bash
+        run: npm run dist --if-present
+
+      - name: Hydrate
+        shell: bash
+        run: npx arc hydrate
+
+      - name: Env
+        shell: bash
+        run: npx arc env --yes
+
+      - name: Test
+        shell: bash
+        run: npm test
 
   # Deploy main branch to staging and git tags to production
   deploy:
