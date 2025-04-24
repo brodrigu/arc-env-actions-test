@@ -16,10 +16,10 @@ test('sandbox.start', async t => {
     t.ok(true, `sandbox started on ${base}`);
 });
 
-test('langfuse key', async t => {
+test('env variable key', async t => {
     let result = await tiny.get({ url: base });
     console.log(result);
-    t.equal(result.body.message, 'testValue', 'langfuse key is correct');
+    t.equal(result.body.message, 'testValue', 'env variable is available');
 });
 
 /**
