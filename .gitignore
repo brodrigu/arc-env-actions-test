@@ -1,0 +1,9 @@
+node_modules
+preferences.arc
+local.conf
+src/http/*/package-lock.json
+src/scheduled/*/package-lock.json
+src/scheduled/*/package.json
+.uploaded-images
+.uploaded-html
+.DS_Store

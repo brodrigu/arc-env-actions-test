@@ -1,0 +1,14 @@
+{
+  "name": "env-test",
+  "version": "0.0.0",
+  "description": "A fresh new Architect project!",
+  "scripts": {
+    "start": "npx sandbox",
+    "test": "tape tests/index.test.mjs"
+  },
+  "devDependencies": {
+    "@architect/architect": "^11.2.2",
+    "tape": "^5.9.0",
+    "tiny-json-http": "^7.5.1"
+  }
+}
