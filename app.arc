@@ -5,5 +5,5 @@ env-test
 get /
 
 @aws
-profile pacificapps
+#profile pacificapps
 region us-west-2

@@ -55,10 +55,6 @@ jobs:
       - name: Env
         shell: bash
         run: npx arc env --yes
-      
-      - name: check for .env file
-        shell: bash
-        run: cat .env
 
       - name: Test
         shell: bash
