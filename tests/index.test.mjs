@@ -10,9 +10,12 @@ const base = 'http://localhost:3333';
  */
 test('sandbox.start', async t => {
     t.plan(1);
-    await sandbox.start({ 
-        quiet: true,
-    });
+
+    const params = { quiet: true }
+    if (process.env.ARC_USE_ENV) {
+        params.env = process.env;
+    }
+    await sandbox.start(params);
     t.ok(true, `sandbox started on ${base}`);
 });
 
